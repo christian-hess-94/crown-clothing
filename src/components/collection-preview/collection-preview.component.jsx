@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import "./collection-preview.styles.scss";
 import CollectionItem from "../collection-item/collection-item.component";
 const CollectionPreview = ({ title, items }) => {
@@ -16,7 +16,5 @@ const CollectionPreview = ({ title, items }) => {
     </div>
   );
 };
-
-CollectionPreview.propTypes = {};
 
 export default CollectionPreview;

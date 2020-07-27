@@ -20,6 +20,13 @@
 
     .option {
       padding: 10px 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 300ms ease all;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "./collection-item.styles.scss";
 import "./collection-item.styles.scss";
 import "./collection-item.styles.scss";
@@ -19,5 +18,4 @@ const CollectionItem = ({ id, name, price, imageUrl }) => {
     </div>
   );
 };
-CollectionItem.propTypes = {};
 export default CollectionItem;
