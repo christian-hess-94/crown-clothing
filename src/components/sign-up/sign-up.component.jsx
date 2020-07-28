@@ -58,7 +58,7 @@ export default class SignUp extends Component {
             handleChange={this.handleChange}
           />
           <FormInput
-            type="text"
+            type="email"
             name="email"
             label="email"
             value={email}
