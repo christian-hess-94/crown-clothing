@@ -6,31 +6,28 @@ import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SigninAndSignup from './pages/signin-and-signup/signin-and-signup.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-class App extends React.Component {
+import { connect } from 'react-redux'
+import { setCurrentUser } from './redux/user/user.actions';
 
-  state = {
-    user: null
-  }
+class App extends React.Component {
 
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      const { setCurrentUser } = this.props
       console.log('Auth state changed');
       // createUserProfileDocument(user)
-      if (!!user) {
-        const userRef = createUserProfileDocument(user);
+      if (userAuth) {
+        const userRef = createUserProfileDocument(userAuth);
         (await userRef).onSnapshot(snapshot => {//Updates in real time with firebase data
-          console.log('Auth snapshot info changed');
-          this.setState({
-            user: {
-              id: snapshot.id,
-              ...snapshot.data()
-            }
+          setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data()
           })
         })
       } else {
-        this.setState({ user })
+        setCurrentUser(userAuth)
       }
     })
   }
@@ -41,10 +38,9 @@ class App extends React.Component {
 
 
   render() {
-    let { user } = this.state
     return (
       <>
-        <Header user={user} />
+        <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
@@ -55,4 +51,7 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+export default connect(null, mapDispatchToProps)(App);
