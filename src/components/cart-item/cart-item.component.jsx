@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "./cart-item.styles.scss";
 const CartItem = ({ item: { imageUrl, price, name, quantity } }) => {
   return (
@@ -14,7 +13,5 @@ const CartItem = ({ item: { imageUrl, price, name, quantity } }) => {
     </div>
   );
 };
-
-CartItem.propTypes = {};
 
 export default CartItem;
