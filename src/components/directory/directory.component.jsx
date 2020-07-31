@@ -1,57 +1,41 @@
-import React, { Component } from "react";
-import "./directory.styles.scss";
-import MenuItem from "../menu-item/menu-item.component";
-export default class Directory extends Component {
-  state = {
-    sections: [
-      {
-        title: "hats",
-        imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-        id: 1,
-        key: 1,
-        linkUrl: "shop/hats",
-      },
-      {
-        title: "jackets",
-        imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-        id: 2,
-        key: 2,
-        linkUrl: "shop/jackets",
-      },
-      {
-        title: "sneakers",
-        imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-        id: 3,
-        key: 3,
-        linkUrl: "shop/sneakers",
-      },
-      {
-        title: "womens",
-        imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-        size: "large",
-        id: 4,
-        key: 4,
-        linkUrl: "shop/womens",
-      },
-      {
-        title: "mens",
-        imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-        size: "large",
-        id: 5,
-        key: 5,
-        linkUrl: "shop/mens",
-      },
-    ],
-  };
+// import React, { Component } from "react";
+// import "./directory.styles.scss";
+// import MenuItem from "../menu-item/menu-item.component";
+// export default class Directory extends Component {
+//   render() {
+//     let { sections } = this.state;
+//     return (
 
-  render() {
-    let { sections } = this.state;
-    return (
-      <div className="directory-menu">
-        {sections.map((section) => (
-          <MenuItem {...section} />
-        ))}
-      </div>
-    );
-  }
-}
+//     );
+//   }
+// }
+
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import "./directory.styles.scss";
+import { selectDirectorySections } from "../../redux/directory/directory.selectors";
+import { createStructuredSelector } from "reselect";
+
+import MenuItem from "../menu-item/menu-item.component";
+
+export const Directory = ({ sections }) => {
+  return (
+    <div className="directory-menu">
+      {sections.map((section) => (
+        <MenuItem key={section.id} {...section} />
+      ))}
+    </div>
+  );
+};
+
+Directory.propTypes = {};
+
+const mapStateToProps = createStructuredSelector({
+  sections: selectDirectorySections,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Directory);
