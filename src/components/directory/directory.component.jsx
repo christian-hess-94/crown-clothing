@@ -1,17 +1,4 @@
-// import React, { Component } from "react";
-// import "./directory.styles.scss";
-// import MenuItem from "../menu-item/menu-item.component";
-// export default class Directory extends Component {
-//   render() {
-//     let { sections } = this.state;
-//     return (
-
-//     );
-//   }
-// }
-
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { connect } from "react-redux";
 
 import "./directory.styles.scss";
