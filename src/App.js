@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
-import HomePage from './pages/homepage/homepage.component';
 import { Switch, Route, Redirect } from 'react-router-dom'
-import ShopPage from './pages/shop/shop.component';
+import ShopPage from './pages/shop/shop.page';
 import Header from './components/header/header.component';
-import SigninAndSignup from './pages/signin-and-signup/signin-and-signup.component';
+import HomePage from './pages/homepage/homepage.page';
+import SigninAndSignup from './pages/signin-and-signup/signin-and-signup.page';
+import CheckoutPage from './pages/checkout/checkout.page';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
-import CheckoutPage from './pages/checkout/checkout.component';
 
 class App extends React.Component {
 

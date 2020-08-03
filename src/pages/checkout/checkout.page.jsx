@@ -7,6 +7,7 @@ import {
 } from "../../redux/cart/cart.selectors";
 import "./checkout.styles.scss";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import StripeButton from "../../components/stripe-button/stripe-button.component";
 const CheckoutPage = ({ cartItems, cartTotal }) => {
   return (
     <div className="checkout-page">
@@ -42,6 +43,15 @@ const CheckoutPage = ({ cartItems, cartTotal }) => {
       ) : (
         <span>No items added into the cart</span>
       )}
+      <div className="test-warning">
+        Test card for payment:
+        <br />
+        Number: 4242 4242 4242 4242
+        <br /> Expire date: any month / year combination in the future
+        <br />
+        CVC: Any three numbers
+      </div>
+      <StripeButton price={cartTotal} />
     </div>
   );
 };
