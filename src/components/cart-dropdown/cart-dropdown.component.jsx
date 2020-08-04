@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import CustomButton from "../custom-button/custom-button.component";
-import "./cart-dropdown.styles.scss";
 import CartItem from "../cart-item/cart-item.component";
 import { withRouter } from "react-router-dom";
 import {
@@ -12,6 +11,11 @@ import {
 } from "../../redux/cart/cart.selectors";
 import { createStructuredSelector } from "reselect";
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
+import {
+  CartDropDownContainer,
+  CartItemsContainer,
+  EmptyMessageText,
+} from "./cart-dropdown.styles";
 
 export const CartDropdown = ({
   cartItems = [],
@@ -26,17 +30,17 @@ export const CartDropdown = ({
   };
 
   return (
-    <div className="cart-dropdown">
-      <div className="cart-items">
+    <CartDropDownContainer>
+      <CartItemsContainer>
         {cartItems.length ? (
           cartItems.map((item) => <CartItem key={item.id} item={item} />)
         ) : (
-          <span className="empty-message">YOUR CART IS EMPTY</span>
+          <EmptyMessageText>YOUR CART IS EMPTY</EmptyMessageText>
         )}
-      </div>
+      </CartItemsContainer>
       TOTAL: ${cartTotal}
       <CustomButton onClick={openCheckoutPage}>GO TO CHECKOUT</CustomButton>
-    </div>
+    </CartDropDownContainer>
   );
 };
 

@@ -5,54 +5,46 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "../../redux/cart/cart.selectors";
-import "./checkout.styles.scss";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 import StripeButton from "../../components/stripe-button/stripe-button.component";
+import {
+  CheckoutPageContainer,
+  CheckoutPageHeader,
+  CheckoutPageHeaderBlock,
+  TestWarningText,
+  TotalText,
+} from "./checkout.styles";
 const CheckoutPage = ({ cartItems, cartTotal }) => {
   return (
-    <div className="checkout-page">
-      <div className="checkout-header">
-        <div className="header-block">
-          <span>Product</span>
-        </div>
-        <div className="header-block">
-          <span>Description</span>
-        </div>
-        <div className="header-block">
-          <span>Quantity</span>
-        </div>
-        <div className="header-block">
-          <span>Price</span>
-        </div>
-        <div className="header-block">
-          <span>Total</span>
-        </div>
-        <div className="header-block">
-          <span>Remove</span>
-        </div>
-      </div>
+    <CheckoutPageContainer>
+      <CheckoutPageHeader>
+        <CheckoutPageHeaderBlock>Product</CheckoutPageHeaderBlock>
+        <CheckoutPageHeaderBlock>Description</CheckoutPageHeaderBlock>
+        <CheckoutPageHeaderBlock>Quantity</CheckoutPageHeaderBlock>
+        <CheckoutPageHeaderBlock>Price</CheckoutPageHeaderBlock>
+        <CheckoutPageHeaderBlock>Total</CheckoutPageHeaderBlock>
+        <CheckoutPageHeaderBlock>Remove</CheckoutPageHeaderBlock>
+      </CheckoutPageHeader>
       {cartItems.length > 0 ? (
         <>
           {cartItems.map((cartItem) => (
             <CheckoutItem key={cartItem.id} cartItem={cartItem} />
           ))}
-          <div className="total">
-            <span>TOTAL: ${cartTotal}</span>
-          </div>
+          <TotalText>TOTAL: ${cartTotal}</TotalText>
         </>
       ) : (
         <span>No items added into the cart</span>
       )}
-      <div className="test-warning">
+      <TestWarningText>
         Test card for payment:
         <br />
         Number: 4242 4242 4242 4242
         <br /> Expire date: any month / year combination in the future
         <br />
         CVC: Any three numbers
-      </div>
+      </TestWarningText>
       <StripeButton price={cartTotal} />
-    </div>
+    </CheckoutPageContainer>
   );
 };
 

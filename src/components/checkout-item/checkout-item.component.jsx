@@ -1,11 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import "./checkout-item.styles.scss";
 import {
   removeItemFromCart,
   addItem,
   decreaseItem,
 } from "../../redux/cart/cart.actions";
+import {
+  CheckoutItemContainer,
+  CheckoutItemImageContainer,
+  CheckoutItemImage,
+  Description,
+  QuantityDescription,
+  QuantityArrow,
+  RemoveButton,
+} from "./checkout-item.styles";
 const CheckoutItem = ({
   cartItem,
   removeItemFromCart,
@@ -14,29 +22,26 @@ const CheckoutItem = ({
 }) => {
   const { imageUrl, name, price, quantity } = cartItem;
   return (
-    <div className="checkout-item">
-      <div className="image-container">
-        <img src={imageUrl} alt={name} />
-      </div>
-      <span className="name">{name}</span>
-      <span className="quantity">
-        <div className="arrow" onClick={() => decreaseItem(cartItem)}>
+    <CheckoutItemContainer>
+      <CheckoutItemImageContainer>
+        <CheckoutItemImage src={imageUrl} alt={name} />
+      </CheckoutItemImageContainer>
+      <Description>{name}</Description>
+      <QuantityDescription>
+        <QuantityArrow onClick={() => decreaseItem(cartItem)}>
           {quantity > 1 ? <>&#10094;</> : <>&#10005; </>}
-        </div>
-        <span className="value">{quantity}</span>
-        <div className="arrow" onClick={() => addItem(cartItem)}>
+        </QuantityArrow>
+        <span>{quantity}</span>
+        <QuantityArrow onClick={() => addItem(cartItem)}>
           &#10095;
-        </div>
-      </span>
-      <span className="price">${price}</span>
-      <span className="price">${price * quantity}</span>
-      <div
-        className="remove-button"
-        onClick={() => removeItemFromCart(cartItem)}
-      >
+        </QuantityArrow>
+      </QuantityDescription>
+      <Description>${price}</Description>
+      <Description>${price * quantity}</Description>
+      <RemoveButton onClick={() => removeItemFromCart(cartItem)}>
         &#10005;
-      </div>
-    </div>
+      </RemoveButton>
+    </CheckoutItemContainer>
   );
 };
 const mapStateToProps = (state) => ({});
