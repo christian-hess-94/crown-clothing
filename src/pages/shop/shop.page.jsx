@@ -2,76 +2,52 @@ import React, { Component } from "react";
 import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
 import CollectionPage from "../collection/collection.page";
 import { Route } from "react-router-dom";
-import {
-  firestore,
-  convertCollectionsSnapshotToMap,
-} from "../../firebase/firebase.utils";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectCollectionsForPreview } from "../../redux/shop/shop.selectors";
-import { addCollections } from "../../redux/shop/shop.actions";
+import {
+  selectIsCollectionFetcing,
+  selectIsCollectionsLoaded,
+} from "../../redux/shop/shop.selectors";
+import { fetchCollectionsStartAsync } from "../../redux/shop/shop.actions";
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
+import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
+import CollectionPageContainer from "../collection/collection.container";
 
-const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 class ShopPage extends Component {
-  state = {
-    loading: true,
-  };
   unsubscribeFromSnapshot = null;
 
   componentDidMount() {
-    const { addCollections } = this.props;
-    const collectionRef = firestore.collection("collections");
-
-    collectionRef.get().then((snapshot) => {
-      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-      addCollections(collectionsMap);
-      this.setState({ loading: false });
-    });
-    // this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
-    //   async (snapshot) => {
-    //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-    //     addCollections(collectionsMap);
-    //     this.setState({ loading: false });
-    //   }
-    // );
+    const { fetchCollectionsStartAsync } = this.props;
+    fetchCollectionsStartAsync();
   }
-  //
-  //https://firestore.googleapis.com/v1/projects/crwn-clothing-61a9d/databases/(default)/documents/
 
   render() {
-    const { match, collections } = this.props;
-    const { loading } = this.state;
+    const { match } = this.props;
     return (
       <div className="shop-page">
         <Route
           exact
           path={`${match.path}`}
-          render={(props) => (
-            <CollectionsOverviewWithSpinner isLoading={loading} {...props} />
-          )}
+          component={CollectionsOverviewContainer}
         />
 
         <Route
           path={`${match.path}/:collectionId`}
-          render={(props) => (
-            <CollectionPageWithSpinner isLoading={loading} {...props} />
-          )}
+          component={CollectionPageContainer}
         />
       </div>
     );
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  collections: selectCollectionsForPreview,
-});
+const mapStateToProps = createStructuredSelector({});
 
 const mapDispatchToProps = (dispatch) => ({
-  addCollections: (collections) => dispatch(addCollections(collections)),
+  //Redux-thunk passa o dispatch como o primeiro parametro de fetchCollectionsStartAsync
+  fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);

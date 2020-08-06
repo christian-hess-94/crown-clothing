@@ -1,6 +1,8 @@
 import ShopActionTypes from "./shop.types"
 const initialState = {
-    collections: null
+    collections: null,
+    isFetching: false,
+    errorMessage: undefined
 }
 
 const shopReducer = (state = initialState, { type, payload }) => {
@@ -8,8 +10,12 @@ const shopReducer = (state = initialState, { type, payload }) => {
 
         case ShopActionTypes.GET_COLLECTIONS:
             return { ...state }
-        case ShopActionTypes.ADD_COLLECTIONS:
-            return { ...state, collections: payload }
+        case ShopActionTypes.FETCH_COLLECTIONS_START:
+            return { ...state, isFetching: true }
+        case ShopActionTypes.FETCH_COLLECTIONS_SUCCESS:
+            return { ...state, collections: payload, isFetching: false }
+        case ShopActionTypes.FETCH_COLLECTIONS_FAILURE:
+            return { ...state, isFetching: false, errorMessage: payload }
         default:
             return state
     }
