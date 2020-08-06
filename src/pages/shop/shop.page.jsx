@@ -25,14 +25,22 @@ class ShopPage extends Component {
   componentDidMount() {
     const { addCollections } = this.props;
     const collectionRef = firestore.collection("collections");
-    this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
-      async (snapshot) => {
-        const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-        addCollections(collectionsMap);
-        this.setState({ loading: false });
-      }
-    );
+
+    collectionRef.get().then((snapshot) => {
+      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+      addCollections(collectionsMap);
+      this.setState({ loading: false });
+    });
+    // this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
+    //   async (snapshot) => {
+    //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+    //     addCollections(collectionsMap);
+    //     this.setState({ loading: false });
+    //   }
+    // );
   }
+  //
+  //https://firestore.googleapis.com/v1/projects/crwn-clothing-61a9d/databases/(default)/documents/
 
   render() {
     const { match, collections } = this.props;
