@@ -1,7 +1,6 @@
 import ShopActionTypes from "./shop.types"
-import SHOP_DATA from './shop.data'
 const initialState = {
-    collections: SHOP_DATA
+    collections: null
 }
 
 const shopReducer = (state = initialState, { type, payload }) => {
@@ -9,7 +8,8 @@ const shopReducer = (state = initialState, { type, payload }) => {
 
         case ShopActionTypes.GET_COLLECTIONS:
             return { ...state }
-
+        case ShopActionTypes.ADD_COLLECTIONS:
+            return { ...state, collections: payload }
         default:
             return state
     }
