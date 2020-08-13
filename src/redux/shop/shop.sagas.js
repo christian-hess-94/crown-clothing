@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects'
+import { takeLatest, call, put } from 'redux-saga/effects'
 
 import ShopActionTypes from './shop.types'
 import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
@@ -7,7 +7,7 @@ import { fetchCollectionsSuccess, fetchCollectionsFailure } from './shop.actions
 
 //Configura a interceptação desta Action apenas
 export function* fetchCollectionsStartInterceptor() {
-    yield takeEvery(
+    yield takeLatest(
         ShopActionTypes.FETCH_COLLECTIONS_START,
         function* () {//Executa o método com a lógica
             try {

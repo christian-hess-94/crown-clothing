@@ -1,30 +1,17 @@
 import React, { Component } from "react";
-import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
-import CollectionPage from "../collection/collection.page";
 import { Route } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import {
-  selectIsCollectionFetcing,
-  selectIsCollectionsLoaded,
-} from "../../redux/shop/shop.selectors";
-import {
-  fetchCollectionsStartAsync,
-  fetchCollectionsStart,
-} from "../../redux/shop/shop.actions";
-import WithSpinner from "../../components/with-spinner/with-spinner.component";
+import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 import CollectionsOverviewContainer from "../../components/collections-overview/collections-overview.container";
 import CollectionPageContainer from "../collection/collection.container";
-
-const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 class ShopPage extends Component {
   unsubscribeFromSnapshot = null;
 
   componentDidMount() {
-    const { fetchCollectionsStartAsync, fetchCollectionsStart } = this.props;
-    // fetchCollectionsStartAsync();
+    const { fetchCollectionsStart } = this.props;
     fetchCollectionsStart();
   }
 

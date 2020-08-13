@@ -21,7 +21,6 @@ class App extends React.Component {
     const { setCurrentUser } = this.props
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       console.log('Auth state changed');
-      // createUserProfileDocument(user)
       if (userAuth) {
         const userRef = createUserProfileDocument(userAuth);
         (await userRef).onSnapshot(snapshot => {//Updates in real time with firebase data
