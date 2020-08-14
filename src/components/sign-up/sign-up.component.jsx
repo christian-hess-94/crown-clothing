@@ -7,10 +7,10 @@ import { connect } from "react-redux";
 import { signUpStart } from "../../redux/user/user.actions";
 class SignUp extends Component {
     state = {
-        displayName: "Christian",
-        email: "christianhess94@gmail.com",
-        password: "12345678",
-        confirmPassword: "12345678",
+        displayName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
     };
 
     handleSubmit = async (event) => {
