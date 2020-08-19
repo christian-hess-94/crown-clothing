@@ -1,78 +1,68 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 import { SignUpContainer } from "./sign-up.styles";
 import { connect } from "react-redux";
 import { signUpStart } from "../../redux/user/user.actions";
-class SignUp extends Component {
-    state = {
+const SignUp = ({ signUpStart }) => {
+    const [userCredentials, setUserCredentials] = useState({
         displayName: "",
         email: "",
         password: "",
         confirmPassword: "",
-    };
+    });
+    const { displayName, email, password, confirmPassword } = userCredentials;
 
-    handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        let { displayName, email, password, confirmPassword } = this.state;
-        const { signUpStart } = this.props;
-        signUpStart({ ...this.state });
+        signUpStart({ ...userCredentials });
     };
 
-    handleChange = (event) => {
-        let { name, value } = event.target;
-        console.clear();
-        console.log(name, value);
-        this.setState({ [name]: value });
+    const handleChange = ({ target: { name, value } }) => {
+        setUserCredentials({ ...userCredentials, [name]: value });
     };
-    render() {
-        let { displayName, email, password, confirmPassword } = this.state;
-        return (
-            <SignUpContainer>
-                <h2>I do not have an account</h2>
-                <span>Sign up with your e-mail and password</span>
-                <form onSubmit={this.handleSubmit} className="sign-up-form">
-                    <FormInput
-                        type="text"
-                        name="displayName"
-                        label="display name"
-                        value={displayName}
-                        required
-                        handleChange={this.handleChange}
-                    />
-                    <FormInput
-                        type="email"
-                        name="email"
-                        label="email"
-                        value={email}
-                        required
-                        handleChange={this.handleChange}
-                    />
-                    <FormInput
-                        type="password"
-                        name="password"
-                        label="password"
-                        value={password}
-                        required
-                        handleChange={this.handleChange}
-                    />
-                    <FormInput
-                        type="password"
-                        name="confirmPassword"
-                        label="confirm password"
-                        value={confirmPassword}
-                        required
-                        handleChange={this.handleChange}
-                    />
-                    <CustomButton name="submit" onClick={this.signInWithGoogle}>
-                        Create account
-                    </CustomButton>
-                </form>
-            </SignUpContainer>
-        );
-    }
-}
+    return (
+        <SignUpContainer>
+            <h2>I do not have an account</h2>
+            <span>Sign up with your e-mail and password</span>
+            <form onSubmit={handleSubmit} className="sign-up-form">
+                <FormInput
+                    type="text"
+                    name="displayName"
+                    label="display name"
+                    value={displayName}
+                    required
+                    handleChange={handleChange}
+                />
+                <FormInput
+                    type="email"
+                    name="email"
+                    label="email"
+                    value={email}
+                    required
+                    handleChange={handleChange}
+                />
+                <FormInput
+                    type="password"
+                    name="password"
+                    label="password"
+                    value={password}
+                    required
+                    handleChange={handleChange}
+                />
+                <FormInput
+                    type="password"
+                    name="confirmPassword"
+                    label="confirm password"
+                    value={confirmPassword}
+                    required
+                    handleChange={handleChange}
+                />
+                <CustomButton name="submit">Create account</CustomButton>
+            </form>
+        </SignUpContainer>
+    );
+};
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch) => ({
