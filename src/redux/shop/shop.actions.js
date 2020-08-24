@@ -26,20 +26,20 @@ export const fetchCollectionsFailure = (errorMessage) => ({
  * Apenas funciona se redux-thunk for um middleware ativado.
  * Caso não haja redux-thunk, a Actions apenas podem retornar ActionObject que possuem os parâmetros "type" e "payload".
  */
-export const fetchCollectionsStartAsync = () => dispatch => {
-    const collectionRef = firestore.collection("collections");
-    dispatch(fetchCollectionsStart())
-    collectionRef.get()
-        .then((snapshot) => {
-            const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-            console.log(collectionsMap);
+// export const fetchCollectionsStartAsync = () => dispatch => {
+//     const collectionRef = firestore.collection("collections");
+//     dispatch(fetchCollectionsStart())
+//     collectionRef.get()
+//         .then((snapshot) => {
+//             const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+//             console.log(collectionsMap);
 
-            dispatch(fetchCollectionsSuccess(collectionsMap))
-        })
-        .catch((error) => {
-            dispatch(fetchCollectionsFailure(error.message))
-        })
-}
+//             dispatch(fetchCollectionsSuccess(collectionsMap))
+//         })
+//         .catch((error) => {
+//             dispatch(fetchCollectionsFailure(error.message))
+//         })
+// }
 
 
 

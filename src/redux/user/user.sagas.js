@@ -46,6 +46,7 @@ function* emailSignInStartInterceptor() {
         UserActionTypes.EMAIL_SIGN_IN_START,
         function* ({ payload: { email, password } }) {
             try {
+
                 const { user } = yield auth.signInWithEmailAndPassword(email, password);
                 yield call(getSnapshot, user)
             } catch (error) {

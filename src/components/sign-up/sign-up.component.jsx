@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import { SignUpContainer } from "./sign-up.styles";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { signUpStart } from "../../redux/user/user.actions";
-const SignUp = ({ signUpStart }) => {
+const SignUp = () => {
     const [userCredentials, setUserCredentials] = useState({
         displayName: "",
         email: "",
@@ -12,10 +12,11 @@ const SignUp = ({ signUpStart }) => {
         confirmPassword: "",
     });
     const { displayName, email, password, confirmPassword } = userCredentials;
+    const dispatch = useDispatch();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        signUpStart({ ...userCredentials });
+        dispatch(signUpStart({ ...userCredentials }));
     };
 
     const handleChange = ({ target: { name, value } }) => {
@@ -63,10 +64,5 @@ const SignUp = ({ signUpStart }) => {
         </SignUpContainer>
     );
 };
-const mapStateToProps = () => ({});
 
-const mapDispatchToProps = (dispatch) => ({
-    signUpStart: (userObject) => dispatch(signUpStart(userObject)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default SignUp;
