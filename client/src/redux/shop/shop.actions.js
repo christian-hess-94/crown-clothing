@@ -1,5 +1,4 @@
 import ShopActionTypes from './shop.types'
-import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 
 
 //todas as actions que podem ser interceptadas pelo arquivo SAGAS

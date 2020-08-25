@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import { SignUpContainer } from "./sign-up.styles";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signUpStart } from "../../redux/user/user.actions";
 const SignUp = () => {
     const [userCredentials, setUserCredentials] = useState({

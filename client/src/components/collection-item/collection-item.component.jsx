@@ -1,5 +1,5 @@
 import React from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addItem } from "../../redux/cart/cart.actions";
 import {
     AddButton,

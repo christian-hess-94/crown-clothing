@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, useRouteMatch } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
