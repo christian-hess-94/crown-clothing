@@ -10,6 +10,7 @@ export const MenuItemContainer = styled.div`
   border: 1px solid black;
   margin: 0 7.5px 15px;
   overflow: hidden;
+
   &:hover {
     cursor: pointer;
     .content {
@@ -22,12 +23,20 @@ export const MenuItemContainer = styled.div`
   }
   &.large {
     height: 380px;
+    
+    @media screen and (max-width: 800px){
+        height: 300px;
+    }
   }
   &:first-child {
     margin-right: 7.5px;
   }
   &:last-child {
-    margin-left: 7.5px;
+    /* margin-left: 7.5px; */
+  }
+
+  @media screen and (max-width: 800px){
+    height: 300px;
   }
 `;
 export const MenuItemImage = styled.div`

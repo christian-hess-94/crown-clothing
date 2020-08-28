@@ -2,10 +2,10 @@ import styled, { css } from "styled-components";
 
 //Function to detec passed props and render specific styles
 const getButtonStyles = (props) => {
-  if (props.isGoogleSignin) {
-    return googleSignInButtonStyles;
-  }
-  return props.inverted ? invertedButtonStyles : buttonStyles;
+    if (props.isGoogleSignin) {
+        return googleSignInButtonStyles;
+    }
+    return props.inverted ? invertedButtonStyles : buttonStyles;
 };
 
 //Specific styles for normal button
@@ -54,7 +54,7 @@ export const CustomButtonContainer = styled.button`
   height: 50px;
   letter-spacing: 0.5px;
   line-height: 50px;
-  padding: 0 35px 0 35px;
+  padding: 0 10px 0 10px;
   font-size: 15px;
   text-transform: uppercase;
   font-family: "Open Sans Condensed";
