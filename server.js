@@ -31,7 +31,7 @@ app.listen(port, error => {
 })
 
 //Para configurar o service-worker do CRA para ser enviado quando express-server receber uma requisição
-app.get('/service-worker.js', (res, res) => {
+app.get('/service-worker.js', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'))
 })
 
